@@ -1,81 +1,82 @@
-import React from 'react'
-import { data } from '../utilitis/data'
-import { RiHeartFill, RiSortAlphabetAsc, RiSortAlphabetDesc, RiSortDesc, RiSortNumberAsc, RiSortNumberDesc } from "@remixicon/react";
-import { useDispatch, useSelector } from 'react-redux';
-import { sortUsersByField } from '../reduxToolkit/dataReducer/dataSlice';
 
-console.log(data)
-
+import React from "react";
+import {
+  RiSortAsc,
+  RiSortDesc,
+} from "@remixicon/react";
+import { useDispatch, useSelector } from "react-redux";
+import { sortUsersByField } from "../reduxToolkit/dataReducer/dataSlice";
 
 const Table = () => {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.data.data);
+  const { sortBy, sortDirection } = useSelector((state) => state.data);
 
-  const dispatch= useDispatch();
-  const datas = useSelector((state)=>state.data.data);
-  const {sortBy,sortDirection}=useSelector((state)=>state.data)
-
-   
-    
-  const handlesort =(field)=>{
+  const handleSort = (field) => {
     dispatch(sortUsersByField(field));
   };
+
+  const getSortIcon = (field) => {
+    if (sortBy !== field) return <RiSortAsc className="inline ml-1" />;
+    return sortDirection === "asc" ? (
+      <RiSortAsc className="inline ml-1" />
+    ) : (
+      <RiSortDesc className="inline ml-1" />
+    );
+  };
+
   return (
- 
-<div className="relative overflow-x-auto">
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div>
+      <div className="relative max-w-7xl mx-auto   mt-10">
+        <table className="w-full text-sm text-left rounded-2xl rtl:text-right  text-gray-500 dark:text-gray-400">
+          <thead className="text-xs  uppercase  bg-gray-700  text-white rounded-2xl">
             <tr>
-                <th scope="col" className="px-6 py-3"  >
-                id <button onClick={()=>handlesort('id')} className='border align-middle rounded ml-1 bg-gray-600 text-white'>{sortBy === 'id' ? (sortDirection === 'asc' ? <RiSortNumberDesc/> : <RiSortNumberAsc/>): ''}</button>
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    first Name<button className='border align-middle rounded ml-1 bg-gray-600 text-white'><RiSortAlphabetAsc/></button> 
-                </th>
-                <th scope="col" className="px-6 py-3">
-                   last name<button className='border align-middle rounded ml-1 bg-gray-600 text-white'><RiSortAlphabetAsc/></button>
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    email<button className='border align-middle rounded ml-1 bg-gray-600 text-white'><RiSortDesc/></button>
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    gender<button className='border align-middle rounded ml-1 bg-gray-600 text-white'><RiSortDesc/></button>
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    city<button className='border align-middle rounded ml-1 bg-gray-600 text-white'><RiSortAlphabetAsc/></button>
-                </th>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("id")}>
+                ID {getSortIcon("id")}
+              </th>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("first_name")}>
+                First Name {getSortIcon("first_name")}
+              </th>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("last_name")}>
+                Last Name {getSortIcon("last_name")}
+              </th>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("email")}>
+                Email {getSortIcon("email")}
+              </th>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("gender")}>
+                Gender {getSortIcon("gender")}
+              </th>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("city")}>
+                City {getSortIcon("city")}
+              </th>
             </tr>
-        </thead>
-        <tbody>
-          {data.map((ele)=>(
-               <tr key={ele.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                   {ele.id}
+          </thead>
+          <tbody>
+            {data.map((ele) => (
+              <tr
+                key={ele.id}
+                className="bg-gray-400 font-bold text-black border-b "
+              >
+                <th
+                  scope="row"
+                  className="px-6 py-4  font-bold text-black whitespace-nowrap "
+                >
+                  {ele.id}
                 </th>
-                <td className="px-6 py-4">
-                    {ele.first_name}
-                </td>
-                <td className="px-6 py-4">
-                    {ele.last_name}
-                </td>
-                <td className="px-6 py-4">
-                    {ele.email}
-                </td>
-                <td className="px-6 py-4">
-                    {ele.gender}
-                </td>
-                <td className="px-6 py-4">
-                   {ele.city}
-                </td>
-            </tr>
-          ))}
-         
+                <td className="px-6 py-4">{ele.first_name}</td>
+                <td className="px-6 py-4">{ele.last_name}</td>
+                <td className="px-6 py-4">{ele.email}</td>
+                <td className="px-6 py-4">{ele.gender}</td>
+                <td className="px-6 py-4">{ele.city}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-        </tbody>
-    </table>
-</div>
 
- 
+      </div>
+    </div>
+  );
+};
 
-  )
-}
-
-export default Table
+export default Table;

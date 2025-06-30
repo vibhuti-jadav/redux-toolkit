@@ -1,5 +1,5 @@
  
- export const  data = [
+  const  data = [
 {"id":1,"first_name":"Stanford","last_name":"Mapis","email":"smapis0@tamu.edu","gender":"Male","city":"Xinshidu"},
 {"id":2,"first_name":"Corilla","last_name":"Bayles","email":"cbayles1@zdnet.com","gender":"Female","city":"Longxi"},
 {"id":3,"first_name":"Duky","last_name":"Sandford","email":"dsandford2@freewebs.com","gender":"Male","city":"Sukasari"},
@@ -55,7 +55,7 @@
 
 
 
-
+export default data;
 
 
 
