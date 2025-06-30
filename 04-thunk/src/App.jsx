@@ -21,7 +21,7 @@ if(users.loading)
 {
   return (
     <div className="p-10 text-lg text-red">
-      lading....
+      loading....
     </div>
   )
 }
