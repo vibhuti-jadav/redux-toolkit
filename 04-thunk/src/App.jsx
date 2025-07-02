@@ -25,10 +25,9 @@ if(users.loading)
 }
   return (
     <>
-
+    
     <button onClick={() => dispatch(fetchUsers())} className=" p-2  shadow-sky-950 shadow rounded-lg bg-cyan-800 ml-25 mt-5 mr-20 px-10 text-white">call users</button>
     <button onClick={() => dispatch(fetchUsers(1))} className=" p-2  shadow-sky-950 shadow rounded-lg bg-cyan-800 text-white px-10">single users</button>
-
     </>
   )
 }
