@@ -26,9 +26,8 @@ function App() {
         {recipe?.recipes?.map(ele=> (
         <Cards key={ele.id} recipe={ele} />
       ))}
+  
       </div>
-      
-   
     </>
   )
 }
